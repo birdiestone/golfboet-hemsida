@@ -1653,17 +1653,18 @@
 
                 <div class="form-group">
                   <label>Jag är intresserad av</label>
+                  <input type="hidden" name="interests" id="f-interests" value="" />
                   <div class="checkbox-group">
                     <label class="check-label">
-                      <input type="checkbox" name="interest-spel" value="spel" />
+                      <input type="checkbox" data-interest="Spel &amp; träning" />
                       Spel &amp; träning
                     </label>
                     <label class="check-label">
-                      <input type="checkbox" name="interest-event" value="event" />
+                      <input type="checkbox" data-interest="Event &amp; grupper" />
                       Event &amp; grupper
                     </label>
                     <label class="check-label">
-                      <input type="checkbox" name="interest-samarbete" value="samarbete" />
+                      <input type="checkbox" data-interest="Klubbsamarbete" />
                       Klubbsamarbete
                     </label>
                   </div>
@@ -1827,6 +1828,10 @@
       const email = form.querySelector('#f-email').value.trim();
 
       if (!name || !email) return;
+
+      const checked = [...form.querySelectorAll('input[data-interest]:checked')]
+        .map(cb => cb.dataset.interest);
+      form.querySelector('#f-interests').value = checked.join(', ');
 
       const data = new URLSearchParams(new FormData(form)).toString();
       fetch('/', {
