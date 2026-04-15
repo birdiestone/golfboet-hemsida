@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500&display=swap" rel="stylesheet" />
 
   <style>
     /* =====================================================
@@ -39,7 +39,7 @@
     body {
       background: var(--bg);
       color: var(--text-1);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
       font-size: 16px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -944,14 +944,11 @@
     .check-label input[type="checkbox"]:checked::after {
       content: '';
       position: absolute;
-      left: 4px;
-      top: 1px;
-      width: 6px;
-      height: 10px;
-      border: 2px solid #fff;
-      border-top: none;
-      border-left: none;
-      transform: rotate(45deg);
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpolyline points='1.5,6 5,9.5 10.5,2.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 70%;
     }
 
     .check-label input[type="checkbox"]:focus-visible {
