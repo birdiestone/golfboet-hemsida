@@ -873,7 +873,8 @@
       margin-bottom: 0.5rem;
     }
 
-    .form-group input {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
       background: var(--bg-2);
       border: 1px solid var(--border);
@@ -887,9 +888,16 @@
       -webkit-appearance: none;
     }
 
-    .form-group input::placeholder { color: var(--text-3); }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
 
-    .form-group input:focus {
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-3); }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
     }
@@ -1624,18 +1632,27 @@
                   <label>Jag är intresserad av</label>
                   <div class="checkbox-group">
                     <label class="check-label">
-                      <input type="checkbox" name="interest" value="spel" />
+                      <input type="checkbox" name="interest-spel" value="spel" />
                       Spel &amp; träning
                     </label>
                     <label class="check-label">
-                      <input type="checkbox" name="interest" value="event" />
+                      <input type="checkbox" name="interest-event" value="event" />
                       Event &amp; grupper
                     </label>
                     <label class="check-label">
-                      <input type="checkbox" name="interest" value="samarbete" />
+                      <input type="checkbox" name="interest-samarbete" value="samarbete" />
                       Klubbsamarbete
                     </label>
                   </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="f-message">Övrig kommentar</label>
+                  <textarea
+                    id="f-message"
+                    name="message"
+                    placeholder="Berätta gärna mer..."
+                  ></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary form-submit">
@@ -1788,8 +1805,12 @@
 
       if (!name || !email) return;
 
-      const data = new FormData(form);
-      fetch('/', { method: 'POST', body: data })
+      const data = new URLSearchParams(new FormData(form)).toString();
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+      })
         .then(() => {
           formFields.style.display = 'none';
           formSuccess.classList.add('visible');
